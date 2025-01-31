@@ -31,7 +31,7 @@ export const StackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName="login">
+      initialRouteName="loading">
       <Stack.Screen
         options={{cardStyleInterpolator: fadeAnimation}}
         name="loading"

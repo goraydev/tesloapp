@@ -6,11 +6,10 @@ import * as eva from '@eva-design/eva';
 import {
   ApplicationProvider,
   IconRegistry,
-  Layout,
-  Text,
 } from '@ui-kitten/components';
 import {useColorScheme} from 'react-native';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
+import {AuthProvider} from './presentations/providers/AuthProvider';
 
 export const MainApp = () => {
   const [isDarkTheme, setValueTheme] = useState(false);
@@ -107,7 +106,9 @@ export const MainApp = () => {
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={theme}>
         <NavigationContainer theme={themeGeneral}>
-          <StackNavigator />
+          <AuthProvider>
+            <StackNavigator />
+          </AuthProvider>
         </NavigationContainer>
       </ApplicationProvider>
     </>

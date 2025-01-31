@@ -1,13 +1,22 @@
 import {Button, Layout, Text} from '@ui-kitten/components';
+import {MyIcon} from '../../components/ui/MyIcon';
+import {useAuthStore} from '../../store/store/useAuthStore';
 
 export const HomeScreen = () => {
+  const {logout} = useAuthStore();
+  const onLogout = () => {
+    console.log('cerrando sesion');
+    logout();
+  };
 
-
-  
   return (
     <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text category="h1">HomeScreen</Text>
-      <Button>Iniciar Sesión</Button>
+      <Button
+        onPress={onLogout}
+        accessoryRight={<MyIcon name="arrow-forward-outline" white />}>
+        Cerrar Sesión
+      </Button>
     </Layout>
   );
 };
