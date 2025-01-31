@@ -39,3 +39,22 @@ export const authCheckStatus = async () => {
     return null;
   }
 };
+
+export const authCreaterUser = async (
+  email: string,
+  password: string,
+  fullname: string,
+) => {
+  try {
+    const {data} = await tesloApi.post<AuthResponse>('/auth/register', {
+      email,
+      password,
+      fullName: fullname,
+    });
+
+    return returnUserToken(data);
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};

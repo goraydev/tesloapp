@@ -1,7 +1,11 @@
 import {create} from 'zustand';
 import {User} from '../../../domain/entities/user.entity';
 import {AuthStatus} from '../../../infraestructue/interfaces/auth.status';
-import {authCheckStatus, authLogin} from '../../../actions/auth/auth';
+import {
+  authCheckStatus,
+  authCreaterUser,
+  authLogin,
+} from '../../../actions/auth/auth';
 import {StorageAdapter} from '../../../config/adapters/storage-adapter';
 
 export interface AuthState {
@@ -11,6 +15,11 @@ export interface AuthState {
   login: (email: string, password: string) => Promise<boolean>;
   checkStatus: () => Promise<void>;
   logout: () => Promise<void>;
+  createUser: (
+    email: string,
+    password: string,
+    fullname: string,
+  ) => Promise<boolean>;
 }
 
 export const useAuthStore = create<AuthState>()((set, get) => ({
@@ -45,5 +54,14 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
   logout: async () => {
     await StorageAdapter.removeItem('token');
     set({status: 'unauthenticated', token: undefined, user: undefined});
+  },
+  createUser: async (email: string, password: string, fullname: string) => {
+    const resp = await authCreaterUser(email, password, fullname);
+    if (resp === null) {
+      set({status: 'unauthenticated', token: undefined, user: undefined});
+      return false;
+    }
+    set({status: 'authenticated', token: resp?.token, user: resp?.user});
+    return true;
   },
 }));

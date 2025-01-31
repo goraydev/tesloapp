@@ -7,7 +7,7 @@ import {useAuthStore} from '../../store/store/useAuthStore';
 import {useState} from 'react';
 
 export const LoginScreen = () => {
-  const {login, user} = useAuthStore();
+  const {login, status} = useAuthStore();
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
   const {height} = useWindowDimensions();
   const [form, setForm] = useState({

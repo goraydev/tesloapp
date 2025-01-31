@@ -3,7 +3,7 @@ import {MyIcon} from '../../components/ui/MyIcon';
 import {useAuthStore} from '../../store/store/useAuthStore';
 
 export const HomeScreen = () => {
-  const {logout} = useAuthStore();
+  const {logout, user} = useAuthStore();
   const onLogout = () => {
     console.log('cerrando sesion');
     logout();
@@ -17,6 +17,8 @@ export const HomeScreen = () => {
         accessoryRight={<MyIcon name="arrow-forward-outline" white />}>
         Cerrar Sesión
       </Button>
+      <Text>Hola</Text>
+      <Text>{user?.fullName}</Text>
     </Layout>
   );
 };

@@ -21,7 +21,7 @@ export const AuthProvider = ({children}: PropsWithChildren) => {
       } else {
         navigation.reset({
           index: 0,
-          routes: [{name: 'loading'}],
+          routes: [{name: 'login'}],
         });
       }
     }
